@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: echo_recorder_api
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: bash start.sh
+    autoDeploy: true
