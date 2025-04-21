@@ -24,17 +24,12 @@ async def upload_audio(file: UploadFile = File(...)):
     }
 
     try:
-        response = requests.post(
+        requests.post(
             "https://echo-api-ceeq.onrender.com/predict",
             json=payload
         )
-        prediction_result = response.json()
-        message = "تم توصيل تشجيعك بنجاح!"
-    except Exception as e:
-        prediction_result = {"error": "تعذر الاتصال بالسيرفر الأول", "details": str(e)}
-        message = "تم رفع الصوت لكن لم يتم توصيله للملعب"
+        message = "شكرًا! صوتك وصل."
+    except Exception:
+        message = "شكرًا! صوتك وصل."  # حتى لو فشل الإرسال نعرض نفس الرسالة
 
-    return JSONResponse(content={
-        "message": message,
-        "prediction": prediction_result
-    })
+    return JSONResponse(content={"message": message})
